@@ -50,12 +50,16 @@ public class SpellCheckerController{
     void ComboSelection(ActionEvent event) {
     	ComboBox.setDisable(true);
     	SpellCheckButton.setDisable(false);
+    	TxtInserimento.setEditable(true);
     }
 
     @FXML
     void doClearText(ActionEvent event) {
     	TxtInserimento.clear();
     	TxtResult.clear();
+    	LabelResult.setText("The text contains ... errors");
+    	LabelTime.setText("Spell check completed in ... seconds");
+    	d.pulisciDizionario();
     }
 
     @FXML
@@ -67,18 +71,21 @@ public class SpellCheckerController{
     	String s="";
     	d.loadDictionary(ComboBox.getValue());
     	List<String> l = new ArrayList();
-    	String c[]= TxtInserimento.getText().replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"]", " ").split(" ");
+    	String c[]= TxtInserimento.getText().replaceAll("[.,\\/#?!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"]", " ").split(" ");
+    	
     	for(int i=0; i < c.length; i++) {
     		if(!c[i].equals(""))
-    		l.add(c[i]);
+    		l.add(c[i].toLowerCase());
     	}
-    	List<RichWord> text = d.spellCheckText(l);
+    	
+    	List<RichWord> text = d.spellCheckTextDichotomic(l);
     	for(RichWord r: text) {
     		if(!r.isEsattezza()) {
     			 s += r.getTesto()+"\n";
     			 errore++;
     		}
     	}
+    	
     	TxtResult.appendText(s);
     	LabelResult.setText("The text contains "+errore+" errors");
     	ComboBox.setDisable(false);

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane prefHeight="327.0" prefWidth="405.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
+<BorderPane prefHeight="327.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
    <top>
       <Label text="Lab3_SpellChecker" BorderPane.alignment="CENTER" />
    </top>
@@ -34,7 +33,7 @@
             </HBox>
             <HBox prefHeight="124.0" prefWidth="405.0">
                <children>
-                  <TextField fx:id="TxtInserimento" prefHeight="94.0" prefWidth="361.0">
+                  <TextField fx:id="TxtInserimento" editable="false" prefHeight="94.0" prefWidth="361.0">
                      <HBox.margin>
                         <Insets left="22.0" />
                      </HBox.margin>

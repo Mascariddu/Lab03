@@ -22,7 +22,7 @@ public class Dizionario {
 			  } 		
 	}
 	
-	public List<RichWord> spellCheckText(List<String> stringa){
+	/*public List<RichWord> spellCheckText(List<String> stringa){
 		
 		List<RichWord> paroleEsatte = new ArrayList<RichWord>(); 
 		for(String s: stringa) {
@@ -32,6 +32,53 @@ public class Dizionario {
 		}
 		
 		return paroleEsatte;
+	}*/
+	
+	public List<RichWord> spellCheckTextLinear(List<String> stringa){
+		
+		boolean h;
+		List<RichWord> paroleSalvate = new ArrayList<RichWord>();
+		for(String s: stringa) {
+			h=false;
+			for(String n:parole) {
+				if(n.equals(s)) {
+					h=true;
+				}
+			}
+			paroleSalvate.add(new RichWord(s,h));
+		}	
+		return paroleSalvate;
+	}
+	
+	public List<RichWord> spellCheckTextDichotomic(List<String> stringa){
+		
+		List<RichWord> paroleSalvate = new ArrayList<RichWord>();
+		int mediana=0;
+		boolean h=false;
+		
+		for(String s: stringa) {
+			
+			int min=0;
+			int max= parole.size()-1;
+			h=false;
+			
+			while(min <= max) {
+				
+				mediana = (min+max)/2;
+				if(s.compareTo(parole.get(mediana))==0) {
+					h=true;
+					break;
+				} else if(s.compareTo(parole.get(mediana)) < 0 )
+						max=mediana -1;
+					   else min = mediana +1;
+			}
+			paroleSalvate.add(new RichWord(s,h));
+		}
+		return paroleSalvate;
+	}
+	
+	public void pulisciDizionario() {
+		parole.clear();
 	}
 	
 	
